@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Twitter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="beginning">
+        <div class="container-select">
+            <div class="foryou">
+                    <h2>For You</h2>
+            </div>
+            <div class="following">
+                <h2>Following</h2>
+            </div>
+        </div>
+        <div class="todo-list">
+            <div class="img-person">
+            </div>
+            <button id="buttonPop" onclick="openPopup()">What are you thinking?</button>
+            <div class="things-to-add">
+                <div class="galery" onclick="openPopup()"></div>
+                <div class="gifs" onclick="openPopup()"></div>
+                <div class="settings" onclick="openPopup()"></div>
+            </div>
+        </div>
+        <ul id="post-container">
+        </ul> 
+    </div>
+    <div class="popup-container" id="popup-container" onclick="closeDropdown()">
+        <div class="popup" id="popup">
+            <div class="out-popup">
+                <span id="cross" onclick="closePopup()"></span>
+                <p>Drafts</p>
+            </div>
+            <div class="mid-popup">
+                <div class="img-person">
+                </div>
+                <textarea type="text" id="input-box" placeholder="What is happening?!"></textarea>
+            </div>
+            <div class="dropdown">
+                <div class="select">
+                    <p class="selected">Everyone<span> can reply</span></p>
+                </div>
+                <ul class="menu">
+                    <div class="menu-text">
+                        <h5>Who can reply?</h5>
+                        <p>Choose who can reply to this post. Anyone mentioned can always reply.</p>
+                    </div>
+                    <li class="active">Everyone</li>
+                    <li>Accounts you follow</li>
+                    <li>Verified accounts</li>
+                    <li>Only accounts you mention</li>
+                </ul>
+            </div>
+            <div class="post-popup">
+                <div class="upload-things">
+                    <div class="galery"></div>
+                    <div class="gifs"></div>
+                    <div class="settings"></div>
+                </div>
+                <button type="button" onclick="addPost();">POST</button>
+            </div>
+        </div> 
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
