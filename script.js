@@ -44,7 +44,7 @@ function addPost(){
         firstBox.appendChild(imgBox);
         firstBox.appendChild(insideBox);
         article.appendChild(firstBox);
-        article.appendChild(removePost);
+        //article.appendChild(removePost);
         postContainer.appendChild(article);
     }
     inputBox.value = "";
