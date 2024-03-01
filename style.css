@@ -301,8 +301,13 @@ body{
     font-family: sans-serif;
     display: flex;
     flex-direction: column;
+    min-height: 20px;
     align-items:flex-start;
-    justify-content:end;
+    justify-content:start;
+}
+.postInLine-inside p{
+    word-wrap: break-word;
+    width: 100%;
 }
 .postInLine-inside h3 span{
     color: rgb(170, 170, 170);
