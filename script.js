@@ -96,3 +96,7 @@ options.forEach(option => {
 menu.addEventListener('click', (e) => {
     e.stopPropagation();
 })
+var galeryImage = document.getElementById("galeryImage");
+var loadFile= function(event){
+    galeryImage.style.backgroundImage = "url("+URL.createObjectURL(event.target.files[0])+")";
+}
