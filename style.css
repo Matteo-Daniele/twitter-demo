@@ -204,16 +204,29 @@ body{
     background:rgba(253, 0, 118, 0.132);
     border-radius: 20px;
 }
-.mid-popup{
+.textAndImagePopup{
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    margin-left: 16px;
-    padding: 0;
+    padding-left: 16px;
+    width: 100%;
+    min-height: 50px;
+    margin-bottom: 10px;
 }
-.mid-popup textarea{
+.mid-popup{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 150px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.textAndImagePopup textarea{
+    box-sizing: border-box;
     resize: none;
     min-width: 500px;
-    min-height: 100px;
+    min-height: 50px;
     border: none;
     outline: none;
     background: transparent;
@@ -221,10 +234,18 @@ body{
     font-size: 20px;
     color: rgb(204, 204, 204);
 }
-.mid-popup textarea::-webkit-scrollbar {
+.textAndImagePopup textarea::-webkit-scrollbar {
     display: none;
 }
+#galeryImage{
+    width: 500px;
+    min-height: 150px;
+    background-size:auto;
+    background-position: center;
+}
 .post-popup{
+    margin-top: 50px;
+    position: relative;
     width: 95%;
     height: 50px;
     display:flex;
@@ -334,8 +355,8 @@ body{
     flex-direction: column;
     justify-content: space-around;
     color: white;
-    top: 210px;
-    left: 10px;
+    bottom: 60px;
+    left: 5px;
     position: absolute;
 }
 .select{
