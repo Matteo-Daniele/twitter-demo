@@ -99,8 +99,6 @@ menu.addEventListener('click', (e) => {
 var galleryImage = document.getElementById("galleryImage");
 let divContainerRightImages = document.createElement("div"); 
 let divContainerLeftImages = document.createElement("div");
-divContainerRightImages.classList.add("images-popup-right");
-divContainerLeftImages.classList.add("images-popup-left");
 var loadFile= function(event){
     for(let i=0; i<event.target.files.length; i++){
         console.log(i);
@@ -108,11 +106,25 @@ var loadFile= function(event){
         imageGallery.src = URL.createObjectURL(event.target.files[i]);
 
         if(i === 1 || i === 2){
-            divContainerRightImages.appendChild(imageGallery);
-        }
-        if(i === 0 || i === 3){
             divContainerLeftImages.appendChild(imageGallery);
         }
+        if(i === 0 || i === 3){
+            divContainerRightImages.appendChild(imageGallery);
+        }
+    }
+    if(divContainerRightImages.childElementCount === 2 && divContainerLeftImages.childElementCount === 0){
+        let secondChild = divContainerRightImages.children[1];
+        divContainerLeftImages.appendChild(secondChild);
+    }else if(divContainerRightImages.childElementCount === 3 && divContainerLeftImages.childElementCount === 1){
+        let lastChild = divContainerRightImages.children[2];
+        divContainerLeftImages.appendChild(lastChild);
+    }
+    if(divContainerRightImages.childElementCount > 0){
+        divContainerRightImages.classList.add("images-popup-right");
+    }
+    if(divContainerLeftImages.childElementCount > 0){
+        divContainerLeftImages.classList.add("images-popup-left");
+       divContainerRightImages.classList.add("images-popup-right-width");
     }
     galleryImage.appendChild(divContainerLeftImages);
     galleryImage.appendChild(divContainerRightImages);

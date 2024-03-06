@@ -238,7 +238,7 @@ body{
 }
 #galleryImage{
     box-sizing: border-box;
-    padding:0 20px 0 60px;
+    padding:0 20px 0 50px;
     width:100%;
     display: flex;
     flex-direction: row;
@@ -261,10 +261,13 @@ body{
 .images-popup-right{
     align-items: stretch;   
     box-sizing: border-box;
-    width:50%;
+    width:100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+.images-popup-right-width{
+    width: 50%;
 }
 .images-popup-right img{
     flex-grow: 1;
