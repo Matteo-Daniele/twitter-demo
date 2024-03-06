@@ -96,7 +96,24 @@ options.forEach(option => {
 menu.addEventListener('click', (e) => {
     e.stopPropagation();
 })
-var galeryImage = document.getElementById("galeryImage");
+var galleryImage = document.getElementById("galleryImage");
+let divContainerRightImages = document.createElement("div"); 
+let divContainerLeftImages = document.createElement("div");
+divContainerRightImages.classList.add("images-popup-right");
+divContainerLeftImages.classList.add("images-popup-left");
 var loadFile= function(event){
-    galeryImage.style.backgroundImage = "url("+URL.createObjectURL(event.target.files[0])+")";
+    for(let i=0; i<event.target.files.length; i++){
+        console.log(i);
+        let imageGallery = document.createElement("img");
+        imageGallery.src = URL.createObjectURL(event.target.files[i]);
+
+        if(i === 1 || i === 2){
+            divContainerRightImages.appendChild(imageGallery);
+        }
+        if(i === 0 || i === 3){
+            divContainerLeftImages.appendChild(imageGallery);
+        }
+    }
+    galleryImage.appendChild(divContainerLeftImages);
+    galleryImage.appendChild(divContainerRightImages);
 }
