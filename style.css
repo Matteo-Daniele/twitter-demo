@@ -245,23 +245,40 @@ body{
     gap: 8px;
 }
 .images-popup-left{
+    gap: 8px;
     align-items: stretch;   
     box-sizing: border-box;
     width:50%;
+    max-height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.images-popup-left img{
-    flex-grow: 1;
-    max-height: 300px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-.images-popup-right{
+.images-popup-left div{
     align-items: stretch;   
     box-sizing: border-box;
     width:100%;
+    height: calc(50% - 4px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.images-popup-right div{
+    align-items: stretch;   
+    box-sizing: border-box;
+    width:100%;
+    height: calc(50% - 4px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.images-popup-right{
+    margin: 0;
+    gap: 8px;
+    align-items: stretch;   
+    box-sizing: border-box;
+    width:100%;
+    max-height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -269,11 +286,15 @@ body{
 .images-popup-right-width{
     width: 50%;
 }
-.images-popup-right img{
+.images-gallery{
     flex-grow: 1;
-    max-height: 300px;
+    height: 100%;
     object-fit: cover;
     border-radius: 12px;
+    z-index: 0;
+}
+.position-close-image{
+   
 }
 .post-popup{
     margin-top: 50px;
@@ -336,7 +357,7 @@ body{
 .close{
     cursor: pointer;
     z-index: 1;
-    margin-left: 10px;
+    margin-right: 10px;
     width: 30px;
     height: 30px;
     font-size: 22px;
