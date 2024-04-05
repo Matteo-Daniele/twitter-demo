@@ -103,9 +103,13 @@ var galleryImage = document.getElementById("galleryImage");
 let divContainerRightImages = document.createElement("div");
 let divContainerLeftImages = document.createElement("div");
 let divContainerLeftImagesTop = document.createElement("div");
+divContainerLeftImagesTop.classList.add("divs-images-popup");
 let divContainerLeftImagesBot = document.createElement("div");
+divContainerLeftImagesBot.classList.add("divs-images-popup");
 let divContainerRightImagesTop = document.createElement("div");
+divContainerRightImagesTop.classList.add("divs-images-popup");
 let divContainerRightImagesBot = document.createElement("div");
+divContainerRightImagesBot.classList.add("divs-images-popup");
 function loadFile(event){
     
         let eventTarget = event.target;
@@ -186,7 +190,6 @@ function loadFile(event){
     // }
 }
 function renderImages(){
-    console.log("Tu wacha entra");
     let removeImage = document.createElement("span"); 
     removeImage.innerHTML = "\u00d7";
     removeImage.classList.add("close");
@@ -196,28 +199,60 @@ function renderImages(){
         let imageGallery = document.createElement("img");
         imageGallery.classList.add("images-gallery");
         imageGallery.src = url;
-        if(i === 0 && divContainerRightImagesTop.childElementCount === 0){
-            divContainerRightImagesTop.appendChild(imageGallery);
-            divContainerRightImages.appendChild(divContainerRightImagesTop);
-            galleryImage.appendChild(divContainerRightImages);
-            divContainerRightImages.classList.add("images-popup-right");
-        }else if(i === 1 && divContainerLeftImagesTop.childElementCount === 0){
-            divContainerLeftImagesTop.appendChild(imageGallery);
-            divContainerLeftImages.appendChild(divContainerLeftImagesTop);
-            galleryImage.appendChild(divContainerLeftImages);
-            divContainerLeftImages.classList.add("images-popup-left");
-            divContainerRightImages.classList.add("images-popup-right-width");
-        }else if(i === 2 && divContainerRightImagesBot.childElementCount === 0){
-            divContainerRightImagesBot.appendChild(imageGallery);
-            divContainerRightImages.appendChild(divContainerRightImagesBot);
-        }else if(i === 3 && divContainerLeftImagesBot.childElementCount === 0){
-            divContainerLeftImagesBot.appendChild(imageGallery);
-            divContainerLeftImages.appendChild(divContainerLeftImagesBot);
+        if(imagesArray.length <= 2){
+            if(i === 0 && divContainerRightImages.childElementCount === 0){
+                console.log("La dimension del array es " + imagesArray.length);
+                divContainerRightImages.appendChild(imageGallery);
+                divContainerRightImages.appendChild(removeImage);
+                galleryImage.appendChild(divContainerRightImages);
+                divContainerRightImages.classList.add("images-popup-right");
+            }else if(i === 1 && divContainerLeftImages.childElementCount === 0){
+                divContainerLeftImages.appendChild(imageGallery);
+                divContainerLeftImages.appendChild(removeImage);
+                galleryImage.appendChild(divContainerLeftImages);
+                divContainerLeftImages.classList.add("images-popup-left");
+                divContainerRightImages.classList.add("images-popup-right-width");
+            }
+        }else{
+            if(i === 0 && divContainerRightImagesTop.childElementCount === 0 && divContainerRightImages.childElementCount === 0){
+                divContainerRightImagesTop.appendChild(imageGallery);
+                divContainerRightImagesTop.appendChild(removeImage);
+                divContainerRightImages.appendChild(divContainerRightImagesTop);
+                galleryImage.appendChild(divContainerRightImages);
+                divContainerRightImages.classList.add("images-popup-right");
+            }else if(i === 1 && divContainerLeftImagesTop.childElementCount === 0 && divContainerLeftImages.childElementCount === 0){
+                divContainerLeftImagesTop.appendChild(imageGallery);
+                divContainerLeftImagesTop.appendChild(removeImage);
+                divContainerLeftImages.appendChild(divContainerLeftImagesTop);
+                galleryImage.appendChild(divContainerLeftImages);
+                divContainerLeftImages.classList.add("images-popup-left");
+                divContainerRightImages.classList.add("images-popup-right-width");
+            }else if(i === 2 && divContainerRightImagesBot.childElementCount === 0){
+                divContainerRightImagesBot.appendChild(imageGallery);
+                divContainerRightImagesBot.appendChild(removeImage);
+                divContainerRightImages.appendChild(divContainerRightImagesBot);
+            }else if(i === 3 && divContainerLeftImagesBot.childElementCount === 0){
+                divContainerLeftImagesBot.appendChild(imageGallery);
+                divContainerLeftImagesBot.appendChild(removeImage);
+                divContainerLeftImages.appendChild(divContainerLeftImagesBot);
+            }
         }
     }  
+    console.log("La dimension del array es " + imagesArray.length);
 }
 function saveAndRenderImages(event){
     console.log("1");
     loadFile(event);
     renderImages();
 }
+galleryImage.addEventListener("click", function(e){
+    if (e.target.tagName === "SPAN"){
+        let elementRemoved = e.target.parentElement;
+        let indice = imagesArray.indexOf(elementRemoved.children[0].src);
+        if(indice !== -1){
+            imagesArray.splice(indice, 1);
+        }
+        e.target.parentElement.remove();
+        renderImages();
+    }
+}, false);
