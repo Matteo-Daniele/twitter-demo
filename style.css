@@ -293,11 +293,19 @@ body{
      border-radius: 12px;
      z-index: 0;
  }
+ .div-height{
+    height: 100% !important;
+ }
  .divs-images-popup{
      position: relative;
  }
  .position-close-image{
     position: absolute;
+    top: 2px;
+    left: 87%;
+ }
+ .left-position-temporary{
+    left: 94% !important;
  }
  .post-popup{
      margin-top: 50px;
