@@ -1,6 +1,5 @@
 let span = document.getElementById("cross");
 span.innerHTML = "\u00d7";
-
 let containerPopup = document.getElementById("popup-container");
 let popup = document.getElementById("popup");
 function openPopup(){
@@ -12,15 +11,24 @@ function closePopup(){
     containerPopup.classList.remove("functionOpenContainer-popup");
     popup.classList.remove("functionOpen-popup");
     inputBox.value = "";
+    imagesArray = [];
+    galleryImage.innerHTML = "";
+    inputImages.value = '';
 }
 const postContainer = document.getElementById("post-container");
 const inputBox = document.getElementById("input-box");
-
 function addPost(){
     if(inputBox.value === ''){
         closePopup();
     }
     else{
+        const postObject = {
+            personeImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd4XOtsk1cyAzAKjvGDtjTlc85bp7dt5SGzQ&usqp=CAU",
+            name: "Personita",
+            nameAt: "@Personita",
+            text: inputBox.value,
+            images: imagesArray,
+        };
         let article = document.createElement("article"); 
         let firstBox = document.createElement("div");
         let insideBox = document.createElement("div");
@@ -33,10 +41,11 @@ function addPost(){
         article.classList.add("post");
         firstBox.classList.add("postInLine");
         insideBox.classList.add("postInLine-inside");
-        imgBox.classList.add("img-person");
-        textPost.innerHTML = inputBox.value;
-        personName.innerHTML = "Personita ";
-        personAt.innerHTML = "@Personita";
+        imgBox.classList.add("img-person-post");
+        imgBox.style.backgroundImage = 'url("'+ postObject.personeImage +'")';
+        textPost.innerHTML = postObject.text;
+        personName.innerHTML = postObject.name;
+        personAt.innerHTML = postObject.nameAt;
         removePost.innerHTML = "\u00d7";
         personName.appendChild(personAt);
         insideBox.appendChild(personName);
@@ -98,8 +107,9 @@ menu.addEventListener('click', (e) => {
 })
 
 // Images Popup
-const imagesArray = [];
-var galleryImage = document.getElementById("galleryImage");
+let inputImages = document.getElementById("file");
+let imagesArray = [];
+let galleryImage = document.getElementById("galleryImage");
 function loadFile(event){
     
         let eventTarget = event.target;
@@ -111,8 +121,8 @@ function loadFile(event){
         }
         console.log("La dimension del array es " + imagesArray.length);
 }
-function renderImages(){
-    galleryImage.innerHTML = "";
+function renderImages(galleryImg, imgArray){
+    galleryImg.innerHTML = "";
     let divContainerRightImages = document.createElement("div");
     let divContainerLeftImages = document.createElement("div");
     let divContainerLeftImagesTop = document.createElement("div");
@@ -123,66 +133,69 @@ function renderImages(){
     divContainerRightImagesTop.classList.add("divs-images-popup");
     let divContainerRightImagesBot = document.createElement("div");
     divContainerRightImagesBot.classList.add("divs-images-popup");
-    for(let i = 0; i < imagesArray.length; i++){
-        let removeImage = document.createElement("span"); 
-        removeImage.innerHTML = "\u00d7";
-        removeImage.classList.add("close");
-        removeImage.classList.add("position-close-image");
-        let url = imagesArray[i];
+    for(let i = 0; i < imgArray.length; i++){
+        // let removeImage = document.createElement("span"); 
+        // removeImage.innerHTML = "\u00d7";
+        // removeImage.classList.add("close");
+        // removeImage.classList.add("position-close-image");
+        let url = imgArray[i];
         let imageGallery = document.createElement("img");
         imageGallery.classList.add("images-gallery");
         imageGallery.src = url;
-        if(imagesArray.length <= 2){
+        if(imgArray.length <= 2){
             if(i === 0 && divContainerRightImages.childElementCount === 0){
-                console.log("La dimension del array es " + imagesArray.length);
+                console.log("La dimension del array es " + imgArray.length);
                 divContainerRightImages.appendChild(imageGallery);
-                divContainerRightImages.appendChild(removeImage);
+                //divContainerRightImages.appendChild(removeImage);
                 divContainerRightImages.classList.add("divs-images-popup");
-                removeImage.classList.add("left-position-temporary");
-                galleryImage.appendChild(divContainerRightImages);
+                //removeImage.classList.add("left-position-temporary");
                 divContainerRightImages.classList.add("images-popup-right");
+                galleryImg.appendChild(divContainerRightImages);
             }else if(i === 1 && divContainerLeftImages.childElementCount === 0){
                 divContainerLeftImages.appendChild(imageGallery);
-                divContainerLeftImages.appendChild(removeImage);
+                //divContainerLeftImages.appendChild(removeImage);
                 divContainerLeftImages.classList.add("divs-images-popup");
-                galleryImage.appendChild(divContainerLeftImages);
-                divContainerRightImages.children[1].classList.remove("left-position-temporary");
+                //divContainerRightImages.children[1].classList.remove("left-position-temporary");
                 divContainerLeftImages.classList.add("images-popup-left");
                 divContainerRightImages.classList.add("images-popup-right-width");
+                galleryImg.appendChild(divContainerLeftImages);
             }
         }else{
             if(i === 0 && divContainerRightImagesTop.childElementCount === 0 && divContainerRightImages.childElementCount === 0){
                 divContainerRightImagesTop.appendChild(imageGallery);
-                divContainerRightImagesTop.appendChild(removeImage);
+                //divContainerRightImagesTop.appendChild(removeImage);
                 divContainerRightImages.appendChild(divContainerRightImagesTop);
-                galleryImage.appendChild(divContainerRightImages);
                 divContainerRightImages.classList.add("images-popup-right");
+                galleryImg.appendChild(divContainerRightImages);
             }else if(i === 1 && divContainerLeftImagesTop.childElementCount === 0 && divContainerLeftImages.childElementCount === 0){
                 divContainerLeftImagesTop.appendChild(imageGallery);
-                divContainerLeftImagesTop.appendChild(removeImage);
+                //divContainerLeftImagesTop.appendChild(removeImage);
                 divContainerLeftImages.appendChild(divContainerLeftImagesTop);
-                galleryImage.appendChild(divContainerLeftImages);
                 divContainerLeftImagesTop.classList.add("div-height");
                 divContainerLeftImages.classList.add("images-popup-left");
                 divContainerRightImages.classList.add("images-popup-right-width");
+                galleryImg.appendChild(divContainerLeftImages);
             }else if(i === 2 && divContainerRightImagesBot.childElementCount === 0){
                 divContainerRightImagesBot.appendChild(imageGallery);
-                divContainerRightImagesBot.appendChild(removeImage);
+                //divContainerRightImagesBot.appendChild(removeImage);
                 divContainerRightImages.appendChild(divContainerRightImagesBot);
             }else if(i === 3 && divContainerLeftImagesBot.childElementCount === 0){
                 divContainerLeftImagesBot.appendChild(imageGallery);
-                divContainerLeftImagesBot.appendChild(removeImage);
+                //divContainerLeftImagesBot.appendChild(removeImage);
                 divContainerLeftImagesTop.classList.remove("div-height");
                 divContainerLeftImages.appendChild(divContainerLeftImagesBot);
             }
         }
-    }  
-    console.log("La dimension del array es " + imagesArray.length);
+    } 
 }
 function saveAndRenderImages(event){
     console.log("1");
     loadFile(event);
-    renderImages();
+    renderImages(galleryImage, imagesArray);
+}
+function addRemove(galleryImg){
+    let i = galleryImg.childElementCount;
+
 }
 galleryImage.addEventListener("click", function(e){
     if (e.target.tagName === "SPAN"){
@@ -191,6 +204,6 @@ galleryImage.addEventListener("click", function(e){
         if(indice !== -1){
             imagesArray.splice(indice, 1);
         }
-        renderImages();
+        renderImages(galleryImage, imagesArray);
     }
 }, false);
