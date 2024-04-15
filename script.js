@@ -29,6 +29,9 @@ function addPost(){
             text: inputBox.value,
             images: imagesArray,
         };
+        let galImg = document.createElement("div");
+        galImg.classList.add("galleryCopy");
+        renderImages(galImg, imagesArray);
         let article = document.createElement("article"); 
         let firstBox = document.createElement("div");
         let insideBox = document.createElement("div");
@@ -50,6 +53,7 @@ function addPost(){
         personName.appendChild(personAt);
         insideBox.appendChild(personName);
         insideBox.appendChild(textPost);
+        insideBox.appendChild(galImg);
         firstBox.appendChild(imgBox);
         firstBox.appendChild(insideBox);
         article.appendChild(firstBox);
@@ -134,10 +138,6 @@ function renderImages(galleryImg, imgArray){
     let divContainerRightImagesBot = document.createElement("div");
     divContainerRightImagesBot.classList.add("divs-images-popup");
     for(let i = 0; i < imgArray.length; i++){
-        // let removeImage = document.createElement("span"); 
-        // removeImage.innerHTML = "\u00d7";
-        // removeImage.classList.add("close");
-        // removeImage.classList.add("position-close-image");
         let url = imgArray[i];
         let imageGallery = document.createElement("img");
         imageGallery.classList.add("images-gallery");
@@ -148,7 +148,6 @@ function renderImages(galleryImg, imgArray){
                 divContainerRightImages.appendChild(imageGallery);
                 //divContainerRightImages.appendChild(removeImage);
                 divContainerRightImages.classList.add("divs-images-popup");
-                //removeImage.classList.add("left-position-temporary");
                 divContainerRightImages.classList.add("images-popup-right");
                 galleryImg.appendChild(divContainerRightImages);
             }else if(i === 1 && divContainerLeftImages.childElementCount === 0){
@@ -192,10 +191,39 @@ function saveAndRenderImages(event){
     console.log("1");
     loadFile(event);
     renderImages(galleryImage, imagesArray);
+    console.log(galleryImage.childElementCount);
+    addRemove(galleryImage);
 }
 function addRemove(galleryImg){
-    let i = galleryImg.childElementCount;
-
+    for(let i = 0; i < galleryImg.childElementCount; i++){
+        let removeImage = document.createElement("span"); 
+        removeImage.innerHTML = "\u00d7";
+        removeImage.classList.add("close");
+        removeImage.classList.add("position-close-image");
+        console.log(galleryImage.childElementCount);
+        let child = galleryImage.children[i];
+        let contador=0;
+        for(let f = 0; f < child.childElementCount; f++){
+            let removeImage2 = document.createElement("span"); 
+            removeImage2.innerHTML = "\u00d7";
+            removeImage2.classList.add("close");
+            removeImage2.classList.add("position-close-image");
+            console.log(child.childElementCount);
+            let grandson = child.children[f];
+            if(grandson.tagName === "DIV"){
+                contador++;
+                grandson.appendChild(removeImage2);
+            }
+        }
+        if(contador === 0){
+            child.appendChild(removeImage);
+        }
+        if(galleryImage.childElementCount === 1){
+            child.children[1].classList.add("left-position-temporary");
+        }else if(galleryImage.childElementCount === 2 && child.children[1].classList.contains("left-position-temporary")){
+            child.children[1].classList.remove("left-position-temporary");
+        }
+    }
 }
 galleryImage.addEventListener("click", function(e){
     if (e.target.tagName === "SPAN"){
@@ -205,5 +233,6 @@ galleryImage.addEventListener("click", function(e){
             imagesArray.splice(indice, 1);
         }
         renderImages(galleryImage, imagesArray);
+        addRemove(galleryImage);
     }
 }, false);

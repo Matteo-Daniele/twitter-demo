@@ -252,7 +252,7 @@ body{
      flex-direction: row;
      gap: 8px;
  }
- #galleryCopy{
+ .galleryCopy{
     box-sizing: border-box;
     padding-top:10px;
     width:100%;
